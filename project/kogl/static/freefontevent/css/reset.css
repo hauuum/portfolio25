@@ -1,0 +1,94 @@
+@charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+*{box-sizing:border-box}
+html, body {width: 100%;margin: 0;padding: 0;}
+body {margin:0;padding:0;width:100%;font-family: 'NanumSquare', sans-serif; letter-spacing: -0.5px; font-weight: 500;}
+
+/* inline */
+img {display:inline-block;border:0 none;max-width:100%;}
+a, cite, code, dfn, del, em, ins, label, q, span, strong {display:inline-block;}
+cite, em, dfn {font-style:normal;}
+sub {vertical-align:bottom;font-family:helvetica;}
+sup {vertical-align:top;font-family:helvetica;}
+hr {display:none;}
+
+/* button */
+button{margin:0;padding:0}
+
+/* block */
+h1, h2, h3, h4, h5, h6 {margin:0;font-size:1em;}
+address {font-style:normal;}
+blockquote, p  {margin:0;}
+pre {margin:0;font-size:1em;}
+
+/* table */
+table {border-spacing:0;border-collapse:collapse;}
+caption {text-indent: -9999px;height:1px;width:1px;overflow: hidden;}
+th, td {padding:0;vertical-align:top;text-align:left;font-weight:normal;} /* opara height=18px */
+.bordernone {border-bottom:0 !important;}
+
+/* list */
+dd, dl, ol, ul {margin:0;padding:0;}
+li {list-style-type:none;}
+
+/* form */
+form {margin:0;padding:0;}
+fieldset {margin:0;padding:0;border:0 none;}
+legend {display:none;}
+input {vertical-align:middle;font-size:12px;}
+input.text {font-size:12px;height:20px;border:1px solid #cccccc;}
+input.check, input.radio {width:13px;height:13px;margin:5px 5px 1px 0;padding:0;}
+
+/* basic */
+.spacial-char {font-family:verdana;}
+.hidden-obj {font-size:0;line-height:0;}
+.display-none {display:none;}
+
+/* align */
+.text-c {text-align:center !important;}
+.text-l {text-align:left !important;}
+.text-r {text-align:right !important;}
+.vertical-t {vertical-align:top !important;}
+.vertical-m {vertical-align:middle !important;}
+.vertical-b {vertical-align:bottom !important;}
+.float-l {float:left;}
+.float-r {float:right;}
+.float-n {float:none;}
+.inline-row {display:inline-block;vertical-align: middle;}
+
+/* clera */
+.clear:after{content:".";height:0;font-size:0;display:block;clear:both;}
+.clear{display:inline-block;}
+.clear2:after{content:".";height:0;font-size:0;display:block;clear:both;}
+.clear2{display:block;}
+
+* html .clear{height:0;}
+.clear{display:block;}
+.clear-both{clear:both;}
+.over-point {cursor:pointer;}
+
+/* Global link */
+a {color:#444; text-decoration:none;}
+a:link {color:#444;}
+a:visited {color:#444;}
+a:hover {text-decoration:none;}
+a:active {color:#444;}
+
+.cursor-p {cursor:pointer;}
+
+/* hidden */
+.blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:0;height:0;font-size:0;line-height:0}
+.hide{position:absolute;visibility:hidden;left:0;top:0;width:0px;height:0px;font-size:0;line-height:0}
+
+.checks checkbox {width:20px;height:20px;border:1px solid #ddd;}
+select::-ms-expand{ display:none /* 화살표 없애기 for IE10, 11*/ }
+select { border-radius:0; /* 아이폰 사파리 보더 없애기 */ 
+		-webkit-appearance:none; /* 화살표 없애기 for chrome*/ 
+		-moz-appearance:none; /* 화살표 없애기 for firefox*/ 
+		appearance:none /* 화살표 없애기 공통*/
+		}
+
+
+
+

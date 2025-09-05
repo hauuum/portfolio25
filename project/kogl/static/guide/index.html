@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>HTML 리스트</title>
+	<link rel="stylesheet" href="./common/css/reset.css" />
+	<link rel="stylesheet" href="./common/css/jquery.treeview.css" />
+	<link rel="stylesheet" href="./common/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="./common/css/style.css" />
+	<script src="../jslibrary/jquery-3.5.1.min.js"></script>
+
+	<style>
+		.u {
+			color: #0f11c3;
+			font-weight: bold;
+		}
+
+		.ok {
+			color: #5cbc55;
+		}
+
+		.e {
+			color: #f00;
+		}
+
+		.err {
+			background-color: #ff0000;
+			color: #ffffff;
+		}
+
+		p {
+			line-height: 1.45;
+		}
+
+		.title {
+			color: white;
+			font-size: 11.0pt;
+			font-weight: 400;
+			font-style: normal;
+			text-decoration: none;
+			font-family: "맑은 고딕", monospace;
+			text-align: general;
+			vertical-align: top;
+			white-space: nowrap;
+			background: #4472C4;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="bodyWrap">
+		<div id="header">
+			<h1>공공누리</h1>
+		</div>
+		<!-- 리스트 시작 : s -->
+		<div id="side">
+			<h2>
+				<i class="fa fa-desktop"></i>
+				<span id="page_title2">WEB</span>
+				<br />
+				<span id="page_leng"></span>
+				<span id="complete_leng"></span>
+			</h2>
+			<div id="urls" class="links">
+				<button class="js-open" type="button">모두열기</button>
+				<button class="js-close" type="button">모두접기</button>
+				<script>
+					$('.js-open').click(function (e) {
+						e.preventDefault();
+						$('.expandable').removeClass('expandable').addClass('collapsable').find('>ul').show()
+						$('.hitarea').removeClass('expandable-hitarea').addClass('collapsable-hitarea')
+					});
+					$('.js-close').click(function (e) {
+						e.preventDefault();
+						$('.collapsable').removeClass('collapsable').addClass('expandable').find('>ul').hide()
+						$('.hitarea').removeClass('collapsable-hitarea').addClass('expandable-hitarea')
+					});
+				</script>
+				<ul id="navigation">
+					<li>
+						<strong>리스트</strong>
+						<ul>
+							<li><a href="../guide/kogl/dist/KOGL-K-1-1-L.html">이미지 리스트_KOGL-K-1-1-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-2-1-L.html">영상 리스트_KOGL-K-2-1-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-3-1-L.html">오디오 리스트_KOGL-K-3-1-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-4-1-L.html">글꼴 리스트_KOGL-K-4-1-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-5-L.html">3D 리스트_KOGL-K-5-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-6-1-L.html">어문 리스트_KOGL-K-6-1-L</a><span class="ok">ok</span></li>
+						</ul>
+					</li>
+					<li>
+						<strong>상세</strong>
+						<ul>
+							<li><a href="../guide/kogl/dist/KOGL-K-1-1-V.html">이미지_KOGL-K-1-1-V</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-2-1-V.html">영상 상세_KOGL-K-2-1-V</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-3-1-V.html">오디오 상세_KOGL-K-3-1-V</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-4-1-V.html">글꼴 상세_KOGL-K-4-1-V</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-5-V.html">3D 상세_KOGL-K-5-V</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-6-1-V.html">어문 상세_KOGL-K-6-1-V</a><span class="ok">ok</span></li>
+						</ul>
+					</li>
+					<li>
+						<strong>통합검색</strong>
+						<ul>
+							<li><a href="../guide/kogl/dist/tsh.html">통합검색_검색결과_KOGL-K-16-1-1-V</a><span class="ok">ok</span></li>
+							<!-- <li><a href="../guide/kogl/dist/tsh2.html">통합검색_검색결과_더보기_KOGL-K-16-1-2-V</a><span class="ok">ok</span></li> -->
+						</ul>
+					</li>
+					<li>
+						<strong>누리컬렉션</strong>
+						<ul>
+							<li><a href="../guide/kogl/dist/KOGL-K-7-1-L.html">이달의 테마_KOGL-K-7-1-L</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/dist/KOGL-K-7-2-L.html">안심인기 저작물_KOGL-K-7-2-L</a><span class="ok">ok</span></li>
+							<!-- <li><a href="../guide/kogl/dist/KOGL-K-7-2-V.html">안심인기 저작물_KOGL-K-7-2-V</a><span class="ok">ok</span></li> -->
+							<li><a href="../guide/kogl/dist/KOGL-K-7-3-L.html">기관별 저작물_KOGL-K-7-3-L</a><span class="ok">ok</span></li>
+						</ul>
+					</li>
+					<!-- <li>
+						<strong>기관페이지</strong>
+						<ul>
+							<li><a href="../guide/kogl/egovMain.html">기관페이지_메인</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/egovList.html">기관페이지_리스트</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/egovPage.html">기관페이지_상세(영상 iframe으로 변경)</a><span class="ok">ok</span></li>
+							<li><a href="../guide/kogl/egovTsh.html">기관페이지_통합검색</a><span class="ok">ok</span></li>
+						</ul>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+
+		<!-- 리스트 끝 : e -->
+		<div id="frame">
+			<div class="ctrl">
+				<button type="button" id="btn_reload" class="btn_ctrl" title="새로고침"><i class="fa fa-refresh"></i></button>
+				<span class="pageurl_box">
+					<input type="text" name="url" id="page_url" value="페이지 주소" class="pageurl" readonly />
+					<span id="page_size"></span>
+					<span id="page_title"></span>
+				</span>
+				<button type="button" id="btn_external" class="btn_ctrl" title="새창열기"><i class="fa fa-external-link"></i></button>
+				<button type="button" id="btn_mobile" class="btn_ctrl" title="모바일보기"><i class="fa fa-mobile"></i></button>
+				<button type="button" id="btn_desktop" class="btn_ctrl" title="PC보기"><i class="fa fa-desktop"></i></button>
+			</div>
+			<div class="iframe_wrap">
+				<iframe id="page_show"></iframe>
+				<button type="button" class="rotate">회전</button>
+			</div>
+		</div>
+	</div>
+	<script src="./common/js/jquery.cookie.js"></script>
+	<script src="./common/js/jquery.treeview.js"></script>
+	<script>
+		var mobile = false;
+		$('td').each(function (index, element) {
+			$(this).has(':contains()')
+		});
+		$('td:contains("HTML")').addClass('html')
+		$('td:contains("게시판")').addClass('board')
+		$('td:contains("API연계")').addClass('api')
+		var blank = false;
+	</script>
+	<script src="./common/js/front.js"></script>
+</body>
+
+</html>

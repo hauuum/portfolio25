@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공누리</title>
+    <link rel="stylesheet" href="../../../kogl/css/sub.css">
+    <script src="../../../jslibrary/jquery-3.5.1.min.js"></script>
+    <script src="../../../jslibrary/dialog.js"></script>
+    <script src="../../../jslibrary/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js"></script>
+    <script src="../../../jslibrary/plyr/plyr.js"></script>
+    <script src="../../../jslibrary/swiper/swiper-bundle.min.js"></script>
+    <script src="../../../commons/commons.js"></script>
+    <script src="../../../commons/commons.js"></script>
+    <script src="../../../kogl/js/common.js"></script>
+    <script src="../../../kogl/js/components.js"></script>
+    <script src="../../../kogl/js/tsh.js"></script>
+    <script src="../../../kogl/js/sub.js"></script>
+    <script>
+        $(function () {
+            //초기화면
+            $(".dialog [class^=tablist] ul li.on").attr('aria-label', '선택됨');
+            $(".dialog [class^=tablist] ul li a").removeAttr('title');
+
+            //tab
+            $("[id^=dialogOpencode]").each(function (index, element) {
+                $(this).find(".contents-tab").hide();
+                $(this).find(".contents-tab:first").show();
+            });
+            $(".dialog [class^=tablist] ul li").on('click', function () {
+                var activeTab = $(this).find("a").attr("href");
+                $(this).parents().parent().find(activeTab).fadeIn(0);
+                $(this).parents().siblings(".contents-tab").not(activeTab).fadeOut(0);
+                return false;
+            });
+            // 모바일 select toggle UI
+            $(".dialog [class^=tablist]").each(function (index, element) {
+                var tabSelectedSpan = $(this).prepend('<span class="selected"></span>')
+                var allOptions = $(this).find('>ul>li');
+                var tabSelected = $(this).find('>ul>li.on>a').find('>span').html()
+                var tabSelectedhtml = $(this).find('.selected').html(tabSelected)
+                $(this).find('.selected').on("click", function () {
+                    $(this).next("ul").toggleClass('show');
+                });
+                allOptions.on("click", function () {
+                    $(this).addClass('on').attr('aria-label', '선택됨').siblings().removeClass(
+                        'on').removeAttr('aria-label').parent('ul').removeClass('show');
+                    var tabSelected = $(this).text()
+                    var tabSelectedhtml = $(this).parent('ul').siblings('.selected').html(
+                        tabSelected);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- 바로가기 메뉴  -->
+    <div class="skip">
+        <a href="#content">본문내용 바로가기</a>
+        <a href="#gnb">주메뉴 바로가기</a>
+    </div>
+
+    <!-- #wrap -->
+    <div id="wrap">
+
+        <!-- header -->
+        <header class="header">
+            <div class="header__menu">
+                <div class="container">
+                    <a href="" class="info-visit">처음 오셨나요?</a>
+                    <nav id="gnb" class="gnb">
+                        <div class="gnb-set">
+                            <ul>
+                                <li><a href="">이미지</a></li>
+                                <li><a href="">영상</a></li>
+                                <li><a href="">오디오</a></li>
+                                <li><a href="">글꼴</a></li>
+                                <li><a href="">3D</a></li>
+                                <li><a href="">어문</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="user">
+                        <ul>
+                            <li>
+                                <a href="" class="join">회원가입</a>
+                            </li>
+                            <li>
+                                <a href="" class="login">로그인</a>
+                            </li>
+                            <li>
+                                <a href="http://www.alright.or.kr/mp/user/alrightIntro/alrightIntro.do" target="_blank">
+                                    <img src="../../../kogl/img/common/alright-bi2.png" alt="ALRIGHT 공공저작권 신탁관리시스템 새창">
+                                </a>
+                            </li>
+                        </ul>
+                        <button type="button" class="all-menu-button">
+                            <span class="sr-only">전체메뉴 열기</span>
+                        </button>
+                        <button type="button" class="all-menu-button-close">
+                            <span class="sr-only">전체메뉴 닫기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="header__submenu" tabindex="-1">
+                <div class="container">
+                    <ul class="dp1">
+                        <li>
+                            <span>누리컬렉션</span>
+                            <ul class="dp2">
+                                <li><a href="./KOGL-K-7-1-L.html">이달의 테마</a></li>
+                                <li><a href="./KOGL-K-7-2-L.html">안심인기 저작물</a></li>
+                                <li><a href="./KOGL-K-7-3-L.html">기관별 저작물</a></li>
+                            </ul>
+                        </li>
+                        <li class="diable">
+                            <span>공공누리 소개</span>
+                            <ul class="dp2">
+                                <li><a href="javascript:void(0);">공공누리란?</a></li>
+                                <li><a href="javascript:void(0);">유형안내</a></li>
+                                <li><a href="javascript:void(0);">이용안내</a></li>
+                            </ul>
+                        </li>
+                        <li class="diable">
+                            <span>홍보누리</span>
+                            <ul class="dp2">
+                                <li><a href="javascript:void(0);">공지사항</a></li>
+                                <li><a href="javascript:void(0);">보도자료</a></li>
+                                <li><a href="javascript:void(0);">이벤트</a></li>
+                                <li><a href="javascript:void(0);">콘텐츠·홍보물&웹툰</a></li>
+                                <li><a href="javascript:void(0);">뉴스레터&이슈리포트</a></li>
+                                <li><a href="javascript:void(0);">공모전</a></li>
+                            </ul>
+                        </li>
+                        <li class="diable">
+                            <span>개방활용지원</span>
+                            <ul class="dp2">
+                                <li><a href="javascript:void(0);">개방지원센터안내</a></li>
+                                <li><a href="javascript:void(0);">개방/활용사례</a></li>
+                                <li><a href="javascript:void(0);">자료실</a></li>
+                                <li><a href="javascript:void(0);">연수/행사 신청</a></li>
+                                <li><a href="javascript:void(0);">자주하는 질문</a></li>
+                                <li><a href="javascript:void(0);">질문과 답변</a></li>
+                            </ul>
+                        </li>
+                        <li class="diable">
+                            <span>마이페이지</span>
+                            <ul>
+                                <li><a href="javascript:void(0);">마이페이지</a></li>
+                                <li><a href="javascript:void(0);">공공저작물 스크랩</a></li>
+                                <li><a href="javascript:void(0);">원문 공공저작물 다운로드</a></li>
+                                <li><a href="javascript:void(0);">내가 한 질문</a></li>
+                                <li><a href="javascript:void(0);">자주하는 질문</a></li>
+                                <li><a href="javascript:void(0);">회원정보 수정/탈퇴</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header__sh">
+                <div class="container">
+                    <h1 class="logo">
+                        <a href="/"><img src="../../../kogl/img/common/logo.png" alt="OPEN 공공누리 공공저작물 자유이용허락"></a>
+                    </h1>
+                    <div class="tsh-box">
+                        <div class="sh-field">
+                            <form action="">
+                                <div class="sh-input">
+                                    <input type="text" title="통합검색" placeholder="검색어를 입력하세요.">
+                                    <div class="auto-complete">
+                                        <div class="auto-complete__tit">
+                                            <span>자동완성</span>
+                                            <label>
+                                                <input type="checkbox" class="toggle">
+                                                <i class="toggle-btn"></i>
+                                            </label>
+                                        </div>
+                                        <ul class="auto-complete__body">
+                                            <li>
+                                                <a href=""><mark>제</mark>국신문</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><mark>제</mark>기</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><mark>제</mark>목</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><mark>제</mark>안서</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><mark>제</mark>외</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <a href="./tsh.html" class="b-sh">검색</a>
+                            </form>
+                            <form action="" class="">
+                                <button type="button" class="b-detail">상세검색</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- 급상승 검색어 -->
+                    <div class="popular-sh">
+                        <h3 class="sr-only">급상승 검색어</h3>
+                        <div class="popular-sh__body">
+                            <div class="swiper swiper-popular">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><a href="" class="">#강릉바다</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#제주도 푸른밤</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#제주도 제주도 겁나 엄청 긴 단어</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#기차여행</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#제주도 태풍</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#안녕히계세요</a></div>
+                                    <div class="swiper-slide"><a href="" class="">#제주도지진</a></div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-wrap">
+                                <button type="button" class="swiper-prev popular-swiper-prev"></button>
+                                <button type="button" class="swiper-next popular-swiper-next"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 본문 -->
+        <div id="container" class="container">
+            <main id="content">
+                <!-- LNB -->
+                <nav class="lnb">
+                    <h1>누리컬렉션</h1>
+                    <ul class="lnb__menu">
+                        <li><a href="./KOGL-K-7-1-L.html">이달의 테마</a></li>
+                        <li><a href="./KOGL-K-7-2-L.html">안심인기 저작물</a></li>
+                        <li class="active"><a href="./KOGL-K-7-3-L.html">기관별 저작물</a></li>
+                    </ul>
+                </nav>
+
+                <!-- 본문 내용 -->
+                <div id="contents">
+                    <div class="subject-group">
+                        <h2 class="list-subject">기관별 저작물</h2>
+                        <p class="location">
+                            <span class="home" role="img" aria-label="홈"></span>
+                            <span>누리컬렉션</span>
+                            <strong aria-label="현재위치">기관별 저작물</strong>
+                        </p>
+                    </div>
+                    <!-- 기관별 저작물 -->
+                    <script>    
+                        document.addEventListener('DOMContentLoaded', function() {
+                            $('#content').addClass('hasLnb');
+                        });
+                    </script>
+
+                    <div class="cont-visual">
+                        <span class="sr-only">말로 떠나는 제주여</span>
+                    </div>
+
+                    <div class="tab-sh-group">
+                        <div class="tab-list">
+                            <button type="button" class="tab-list__btn"><span>국가기관</span></button>
+                            <div class="tab-list__list">
+                                <a href="#" id="" onclick="" class="on" aria-label="선택됨">국가기관</a>
+                                <a href="#" id="" onclick="">지방자치단체</a>
+                                <a href="#" id="" onclick="">공공/기타 기관</a>
+                            </div>
+                        </div>
+
+                        <div class="bd-list__title reset">
+                            <div class="bd-list__sh">
+                                <form name="" id="" method="" action="">
+                                    <div class="sh__select-input sh-field">
+                                        <div class="sh-input">
+                                            <input type="text" title="기관별 저작물 검색" placeholder="검색어를 입력하세요.">
+                                        </div>
+                                        <button type="button" id="resetSearch" class="b-reset reset-btn"> <span class="sr-only">초기화</span></button>
+                                        <button type="button" class="b-sh" onclick="document.getElementById('frm').submit();">검색</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="list-tabpane on"  id="panel1-1" aria-labelledby="tab1-1" role="tabpanel">
+                                <div class="photo-list agency">
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci01.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">경북북부보훈지청</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci02.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국가교육위원회</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci03.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립경주박물관</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci04.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립공주박물관</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci05.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립생물자원관</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci06.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립부여박물관</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci07.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립대전현충원</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci08.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국립국악원</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="photo-list__item">
+                                        <a href="">
+                                            <div class="photo-list__thumnail">
+                                                <span style="background-image: url('../../../kogl/img/sub/agency/agency-ci09.png');"></span>
+                                            </div>
+                                            <div class="photo-list__desc">
+                                                <p class="photo-list__title">국가유산청</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- 페이지네이션 -->
+                                <div class="paginationSet">
+                                    <ul class="pagination pagination2 pagination-centered">
+                                        <li class="i first "><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('1');"><span class="s"><span>처음 <span class="t">목록으로 이동</span></span></span></a></li> 
+                                        <li class="i prev "><a href="javascript:void(0);"><span class="s"><span>이전 <span class="t">목록으로 이동</span></span></span></a></li><li class="on"><span><em title="현재목록"><span>1</span></em></span></li><li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('2');"><span>2</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('3');"><span>3</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('4');"><span>4</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('5');"><span>5</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('6');"><span>6</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('7');"><span>7</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('8');"><span>8</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('9');"><span>9</span></a></span></li>
+                                        <li><span><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('10');"><span>10</span></a></span></li>
+                                        <li class="i next"><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('11');"><span class="s"><span>다음 <span class="t">목록으로 이동</span></span></span></a></li>
+                                        <li class="i end"><a href="javascript:void(0);" onclick="javascript:goRecommendDivList('3273');"><span class="s"><span>끝 <span class="t">목록으로 이동</span></span></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- // #wrap -->
+
+    <!-- 푸터 -->
+    <footer id="footer">
+        <div class="footer-banner">
+            <div class="container">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://www.mcst.go.kr" target="_blank" title="페이지 이동">
+                                <img src="../../../kogl/img/common/banner01.png" alt="문화체육관광부 새창">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-banner__ctrl">
+                    <button type="button" class="footer-banner__button-prev">
+                        <span class="sr-only">이전 배너</span>
+                    </button>
+                    <button type="button" class="footer-banner__button-next">
+                        <span class="sr-only">다음 배너</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-menu">
+            <div class="container">
+                <div class="footer-left">
+                    <ul class="footer-menu__sns">
+                        <li class="logo">
+                            <a href="/">
+                                <img src="../../../kogl/img/sub/footer-logo.png" alt="OPEN 공공누리 공공저작물 자유이용허락"></a>
+                        </li>
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/kogl1" target="_blank" title="공공누리 페이스북 새창"></a>
+                        </li>
+                        <li class="blog">
+                            <a href="https://blog.naver.com/kogl1" target="_blank" title="공공누리 블로그 새창"></a>
+                        </li>
+                        <li class="instagram">
+                            <a href="https://www.instagram.com/oo.nuri/" target="_blank" title="공공누리 인스타그램 새창"></a>
+                        </li>
+                        <li class="youtube">
+                            <a href="https://www.youtube.com/c/kogl1" target="_blank" title="공공누리 유튜브 새창"></a>
+                        </li>
+                    </ul>
+                    <address>
+                        <div class="address">
+                            <p>대표전화 <a href="tel:1670-0052" title="전화걸기">1670-0052</a></p>
+                            <p class="db">(우)03925 서울특별시 마포구 월드컵북로 400 6층·8층 (상암동, 서울경제진흥원)</p>
+                            <p>Copyright 한국문화정보원</p>
+                        </div>
+                    </address>
+                    <ul class="footer-menu__list">
+                        <li><a href="https://www.culture.go.kr/info/privacyPolicy.do" class="point"
+                                title="개인정보처리방침">개인정보처리방침</a></li>
+                        <li><a href="/etc/clause.do" title="이용약관">이용약관</a></li>
+                        <li><a href="/etc/copyright.do" title="저작권정책">저작권정책</a></li>
+                        <li><a href="http://www.kcisa.kr" target="_blank" title="한국문화정보원 소개">한국문화정보원 소개</a></li>
+                    </ul>
+
+                </div>
+                <div class="footer-right">
+                    <div class="footer-menu__link">
+                        <a href="http://www.mcst.go.kr/main.jsp" target="_blank" class="mcst-link" title="페이지 이동">
+                            <img src="../../../kogl/img/common/footer-ci1.png" alt="문화체육관광부 새창">
+                        </a>
+                        <a href="http://www.kcisa.kr" target="_blank" class="kcisa-link" title="페이지 이동">
+                            <img src="../../../kogl/img/common/footer-ci2.png" alt="KCISA 한국문화정보원 새창">
+                        </a>
+                        <select name="" id="">
+                            <option value="" selected>Family SITE</option>
+                        </select>
+                    </div>
+                    <div class="footer-menu__mark">
+                        <a href="https://www.i-award.or.kr/Web/Assess/FinalCandidateView.aspx?REG_SEQNO=13433"
+                            target="_blank" class="award-link" title="페이지 이동">
+                            <img src="../../../kogl/img/common/webaward_logo.png" alt="웹어워드코리아 새창">
+                        </a>
+                        <a href="http://www.wa.or.kr/board/list.asp?BoardID=0006" target="_blank" class="wa-link"
+                            title="새창">
+                            <img class="wa" alt="(사)한국장애인단체총연합회 한국웹접근성인증평가원 웹 접근성 우수사이트 인증마크(WA인증마크)"
+                                src="../../../kogl/img/common/bottom_mark.png">
+                        </a>
+                        <a href="https://www.kcopa.or.kr" target="_blank" class="kcopa-link" title="페이지 이동">
+                            <img src="../../../kogl/img/common/bottom_mark2.png"
+                                alt="저작권 안심 마크(한국저작권보호원 저작권OK 지정마크) 새창">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 통합검색 상세검색 팝업 -->
+    <div id="popwrap" class="popwrap tsh-detail-pop sh-detail-pop">
+		<div id="popcontainer" class="popcontainer">
+			<form name="searchDetailForm" id="searchDetailForm" class="search-detail__form" action="/search/search.do" method="post">
+				<input type="hidden" name="query" value="">
+				<input type="hidden" title="orgCode" name="orgCode" value="">
+				<input type="hidden" title="company" name="company" value="">
+				<input type="hidden" name="division" value="">
+				<div class="popcontent">
+					<dl>
+						<dt>검색어</dt>
+						<dd>
+							<div class="input-sh-box">
+								<input type="text" name="requery" value="" placeholder="검색어를 입력하세요." title="검색어">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>제공기관</dt>
+						<dd>
+							<div class="input-sh-box">
+								<button type="button" class="i-sh" id="shSite">제공기관 검색</button>
+								<!-- 제공기관 검색 팝업 -->
+								<div class="site-list-pop site-list__search">
+									<div class="site-list__header">
+										<div>제공기관 검색</div>
+									</div>
+									<div class="site-list__body">
+										<div>
+											<input type="text" id="deptKeyword" class="deptKeyword deptKeywordKeyup" name="deptKeyword" value="" placeholder="검색어를 입력해 주세요" title="통합검색">
+											<button type="button" onclick="getDept('',document.getElementById('deptKeyword').value)" class="btn sm b-sh">검색</button>
+										</div>
+										<div class="site__category">
+											<p class="total">총 <mark class="point deptCnt">1280</mark>개 도입기관이 있습니다.</p>
+											<ul class="initial-list" id="deptUl">
+												<li id="deptLi1"><a href="javascript:getDept(0, 'ㄱ', 'deptLi1')">ㄱ</a></li>
+												<li id="deptLi2"><a href="javascript:getDept(0, 'ㄴ', 'deptLi2')">ㄴ</a></li>
+												<li id="deptLi3"><a href="javascript:getDept(0, 'ㄷ', 'deptLi3')">ㄷ</a></li>
+												<li id="deptLi4"><a href="javascript:getDept(0, 'ㄹ', 'deptLi4')">ㄹ</a></li>
+												<li id="deptLi5"><a href="javascript:getDept(0, 'ㅁ', 'deptLi5')">ㅁ</a></li>
+												<li id="deptLi6"><a href="javascript:getDept(0, 'ㅂ', 'deptLi6')">ㅂ</a></li>
+												<li id="deptLi7"><a href="javascript:getDept(0, 'ㅅ', 'deptLi7')">ㅅ</a></li>
+												<li id="deptLi8"><a href="javascript:getDept(0, 'ㅇ', 'deptLi8')">ㅇ</a></li>
+												<li id="deptLi9"><a href="javascript:getDept(0, 'ㅈ', 'deptLi9')">ㅈ</a></li>
+												<li id="deptLi10"><a href="javascript:getDept(0, 'ㅊ', 'deptLi10')">ㅊ</a></li>
+												<li id="deptLi11"><a href="javascript:getDept(0, 'ㅋ' ,'deptLi11')">ㅋ</a></li>
+												<li id="deptLi12"><a href="javascript:getDept(0, 'ㅌ' ,'deptLi12')">ㅌ</a></li>
+												<li id="deptLi13"><a href="javascript:getDept(0, 'ㅍ' ,'deptLi13')">ㅍ</a></li>
+												<li id="deptLi14"><a href="javascript:getDept(0, 'ㅎ','deptLi14')">ㅎ</a></li>
+											</ul>
+										</div>
+										<div class="site__checkbox">
+                                            <div class="sh-chkbox__box">
+                                                <div class="sh-chkbox__all">
+                                                    <label for="allCompany">
+                                                        <input type="checkbox" class="all" id="allCompany" name="allCompany" value="">
+                                                        <i class="checkbox"></i>
+                                                        <span>전체기관</span>
+                                                    </label>
+                                                </div>
+                                                <ul class="sh-chkbox deptList" id="deptPopwrap">
+                                                    <li><label><input type="checkbox" value="062161230" onclick="javascript:selDept('(주)스포카','062161230');"><i class="checkbox"></i><span>(주)스포카</span></label></li>
+                                                    <li><label><input type="checkbox" value="062161229" onclick="javascript:selDept('(주)야놀자','062161229');"><i class="checkbox"></i><span>(주)야놀자</span></label></li>
+                                                    <li><label><input type="checkbox" value="062161231" onclick="javascript:selDept('(주)우아한형제들','062161231');"><i class="checkbox"></i><span>(주)우아한형제들</span></label></li>
+                                                    <li><label><input type="checkbox" value="062161230" onclick="javascript:selDept('(주)스포카','062161230');"><i class="checkbox"></i><span>(주)스포카</span></label></li>
+                                                    <li><label><input type="checkbox" value="062161229" onclick="javascript:selDept('(주)야놀자','062161229');"><i class="checkbox"></i><span>(주)야놀자</span></label></li>
+                                                </ul>
+                                            </div>
+											<ul class="site-list">
+                                                <li data-name="(주)야놀자" data-code="062161229"><button type="button" class="i-del" aria-label="삭제"><span>(주)야놀자</span><i class="ico-del-wh" role="img"></i></button></li>
+                                                <li data-name="88관광개발" data-code="040110483"><button type="button" class="i-del" aria-label="삭제"><span>88관광개발</span><i class="ico-del-wh" role="img"></i></button></li>
+                                            </ul>
+											<div class="paginationSet paginationDeptSet"><ul class="pagination pagination2 pagination-centered"><li class="i first"><span class="s"><span>처음 <span class="t">목록</span></span></span></li><li class="i prev "><span class="s"><span>이전 <span class="t">목록</span></span></span></li><li class="on"><span><em title="현재목록"><span>1</span></em></span></li><li><span><a href="javascript:void(0);" onclick="javascript:getDept('12','','undefined','2');"><span>2</span></a></span></li><li><span><a href="javascript:void(0);" onclick="javascript:getDept('24','','undefined','3');"><span>3</span></a></span></li><li><span><a href="javascript:void(0);" onclick="javascript:getDept('36','','undefined','4');"><span>4</span></a></span></li><li><span><a href="javascript:void(0);" onclick="javascript:getDept('48','','undefined','5');"><span>5</span></a></span></li><li class="i next"><a href="javascript:void(0);" onclick="javascript:getDept('60','','undefined','6')"><span class="s"><span>다음 <span class="t">목록으로 이동</span></span></span></a></li><li class="i end"><a href="javascript:void(0);" onclick="javascript:getDept('1260','','undefined','106')"><span class="s"><span>끝 <span class="t">목록으로 이동</span></span></span></a></li> </ul></div>
+										</div>
+									</div>
+									<div class="site-list__footer">
+										<div class="btn-wrap c">
+											<button type="button" class="btn b-md3 b-cancel">취소</button>
+											<button type="button" class="btn b-md3 b-ok">확인</button>
+										</div>
+									</div>
+								</div>
+                                <ul class="site-list">
+                                    <li data-name="(주)야놀자" data-code="062161229"><button type="button" class="i-del" aria-label="삭제"><span>(주)야놀자</span><i class="ico-del-wh" role="img"></i></button></li>
+                                    <li data-name="88관광개발" data-code="040110483"><button type="button" class="i-del" aria-label="삭제"><span>88관광개발</span><i class="ico-del-wh" role="img"></i></button></li>
+                                </ul>
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>등록년도</dt>
+						<dd>
+							<div class="sh-date">
+								<input type="text" name="startYear" value="" class="datepicker year" title="조회시작연도">
+								<span>~</span>
+								<input type="text" name="endYear" value="" class="datepicker year" title="조회종료연도">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>저작물 유형</dt>
+						<dd>
+							<div class="sh-chkbox">
+								<label>
+									<input type="checkbox" class="allDivision all" title="전체">
+									<i class="checkbox"></i>
+									<span>전체</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="imgDivisionBtn" value="img" title="이미지">
+									<i class="checkbox"></i>
+									<span>이미지</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="videoDivisionBtn" value="video" title="영상">
+									<i class="checkbox"></i>
+									<span>영상</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="audioDivisionBtn" value="audio" title="오디오">
+									<i class="checkbox"></i>
+									<span>오디오</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="fontDivisionBtn" value="font" title="글꼴">
+									<i class="checkbox"></i>
+									<span>글꼴</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="3DDivisionBtn" value="3D" title="3D">
+									<i class="checkbox"></i>
+									<span>3D</span>
+								</label>
+								<label>
+									<input type="checkbox" name="divisionBtn" id="docDivisionBtn" value="doc" title="어문">
+									<i class="checkbox"></i>
+									<span>어문</span>
+								</label>
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>저작물 구분</dt>
+						<dd>
+							<div class="sh-chkbox">
+								<label>
+									<input type="checkbox" class="allGubun all" title="전체">
+									<i class="checkbox"></i>
+									<span>전체</span>
+								</label>
+								<div>
+									<label>
+										<input type="checkbox" name="searchGubun" value="K" title="원문 공공저작물">
+										<i class="checkbox"></i>
+										<span>원문 공공저작물</span>
+									</label>
+									<div class="question-mark" tabindex="0">
+										<i class="fa fa-question-circle"><span class="sr-only">설명 보기:각 기관에서 제공해주신 원문DB 공공저작물로 바로 다운로드 가능합니다.</span></i>
+										<div class="question-mark__answer">
+											<p>각 기관에서 제공해주신 원문DB 공공저작물로 바로 다운로드 가능합니다.</p>
+										</div>
+									</div>
+								</div>
+								<div>
+									<label>
+										<input type="checkbox" name="searchGubun" value="R" title="연계 저작물">
+										<i class="checkbox"></i>
+										<span>연계 저작물</span>
+									</label>
+									<div class="question-mark" tabindex="0">
+										<i class="fa fa-question-circle"><span class="sr-only">설명 보기: 각 기관 사이트에서 연계한 저작물로 기관 페이지로 이동합니다.</span></i>
+										<div class="question-mark__answer">
+											<p>각 기관 사이트에서 연계한 저작물로 기관 페이지로 이동합니다.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							<button type="button" class="shInfo">이용조건 <span><i class="ico-info" role="img"></i></span></button>
+							<div class="use-info-pop use-info">
+								<div class="use-info__header">
+									<h4>이용조건 이란</h4>
+								</div>
+								<div class="use-info__body">
+                                    <div>
+                                        <p>1) 제1유형 : 출처표시 <br>
+                                            - 출처표시<br>
+                                            - 상업적, 비상업적 이용가능<br>
+                                            - 변형 등 2차적 저작물 작성 가능<br><br>
+                                        </p>
+                                        <p>2) 제2유형 : 출처표시 + 상업적 이용금지 <br>
+                                            - 출처표시<br>
+                                            - 비상업적 이용만 가능<br>
+                                            - 변형 등 2차적 저작물 작성 가능<br><br>
+                                        </p>
+                                        <p>3) 제3유형 : 출처표시 + 상업적 이용금지<br>
+                                            - 출처표시<br>
+                                            - 상업적, 비상업적 이용가능<br>
+                                            - 변형 등 2차적 저작물 작성 금지<br><br>
+                                        </p>
+                                        <p>4) 제4유형 : 출처표시 + 상업적 이용금지 + 변경금지<br>
+                                            - 출처표시<br>
+                                            - 비상업적 이용만 가능<br>
+                                            - 변형 등 2차적 저작물 작성 금지<br><br>
+                                        </p>
+                                        <p>5) 만료공공저작물 : 이용조건(출처표시 포함)이 없이 자유롭게 이용<br>
+                                            - 이용조건(출처표시 포함) 없음
+                                        </p>
+                                    </div>
+								</div>
+								<button type="button" class="i-close-wh" aria-label="닫기">
+									<i class="ico-del-lg" role="img"></i>
+								</button>
+							</div>
+						</dt>
+						<dd>
+							<div class="sh-chkbox">
+								<label>
+									<input type="checkbox" class="all" name="atcTypeCodeAll" value="ALL" title="전체">
+									<i class="checkbox"></i>
+									<span>전체</span>
+								</label>
+								<label>
+									<input type="checkbox" name="atcTypeCode" value="1" title="제1유형">
+									<i class="checkbox"></i>
+									<span>제1유형</span>
+								</label>
+								<label>
+									<input type="checkbox" name="atcTypeCode" value="2" title="제2유형">
+									<i class="checkbox"></i>
+									<span>제2유형</span>
+								</label>
+								<label>
+									<input type="checkbox" name="atcTypeCode" value="3" title="제3유형">
+									<i class="checkbox"></i>
+									<span>제3유형</span>
+								</label>
+								<label>
+									<input type="checkbox" name="atcTypeCode" value="4" title="제4유형">
+									<i class="checkbox"></i>
+									<span>제4유형</span>
+								</label>
+								<label>
+									<input type="checkbox" name="atcTypeCode" value="9" title="만료 공공저작물">
+									<i class="checkbox"></i>
+									<span>만료 공공저작물</span>
+								</label>
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</form>
+			<div class="popfooter btn-wrap between">
+                <button type="button" class="i-close">닫기</button>
+				<div class="flex">
+				    <button type="button" class="btn md3 b-reset" onclick="resetSearch()">초기화</button>
+                    <button type="button" class="btn md3 b-ok" id="topSearch">검색</button>
+                </div>
+			</div>
+			
+		</div>
+	</div>
+
+    <!-- 공공누리인증서1유형팝업 -->
+    <div class="dialog w-md">
+        <div role="dialog" id="dialogOpencode1" aria-labelledby="opencode1_label" aria-modal="true" class="hidden">
+            <div class="head">
+                <h2 id="opencode1_label" class="dialog-label">공공누리 일반증서</h2>
+            </div>
+            <div class="body">
+                <div aria-label="공공누리인증서1유형" class="tablist1">
+                    <ul>
+                        <li class="on"><a href="#certificate1-tab"><span>공공누리 일반증서</span></a></li>
+                        <li><a href="#service1-tab"><span>공공누리 이용약관</span></a></li>
+                    </ul>
+                </div>
+                <div class="contents-tab" id="certificate1-tab">
+                    <div class="panelone" tabindex="0">
+                        <h4 class="panelone__title">제 1유형 : 출처 표시</h4>
+                        <p class="panelone__desc-p">이 페이지는 공공누리 이용약관과 등록된 저작물의 유형안내에 대하여 이해하기 쉽게 요약한 것입니다.</p>
+                        <h5 class="bu1">이용자가 가지는 권리</h5>
+                        <p>1. 온·오프라인 상에 공유 및 이용 : 온·오프라인을 통하여 공유 및 이용 가능</p>
+                        <p>2. 저작물 변경 : 2차적 저작물로 변경하여 이용 가능</p>
+                        <p>3. 이 저작물은 영리 목적으로 이용할 수 있습니다.</p>
+                        <h5 class="bu1">저작물 사용 조건</h5>
+                        <p>- 출처 표시 : 저작물의 출처를 표시하셔야 합니다.</p>
+                        <p class="red refer">공공기관이 후원한다거나 공공기관과 특수한 관계에 있는 것처럼 제 3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <h5 class="bu1">알아야 할 사항</h5>
+                        <div class="panelone__wrap">
+                            <h6>I. 이용조건의 표시 및 변경</h6>
+                            <p>1. 이용자가 공공누리 저작물 활용시 출처표시를 꼭 해주셔야 합니다.</p>
+                            <p>2. 공공누리 저작물의 이용조건은 변경될 수 있습니다. 다만 이용자가 이용조건 변경전 사용하셨다면 해당저작물 한해 용도변경 없이 계속 이용할 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>II. 이용조건의 위반</h6>
+                            <p>1. 이용자가 공공누리 이용조건을 위반할 경우 그 즉시 이용허락이 종료됩니다.</p>
+                            <p>2. 이용자가 이용조건 위반 후 지속적으로 공공저작물을 이용할 경우 저작권 침해가 성립되므로 형사상, 민사상 책임을 부담 하실 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>III. 공공기관의 면책</h6>
+                            <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                            <p>2. 공공기관 및 그 직원은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 책임을 지지 않습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>IV. 기타</h6>
+                            <p>1. 이용자가 저작물을 보유하고 있는 공공기관으로부터 별도의 이용허락을 받은 경우 공공누리 조건을 적용하지 않으셔도 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <!---여기부터 수정-->
+                <div class="contents-tab" id="service1-tab">
+                    <div class="panelone" tabindex="0">
+                        <h5 class="bu1">공공누리 제 1유형의 이용조건</h5>
+                        <div class="box-opencode">
+                            <ul class="box-opencode__list">
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한글</span>
+                                        <img src="../../../kogl/img/sub/img_opencode1_m.jpg" alt="제 1유형 한글 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">영문</span>
+                                        <img src="../../../kogl/img/sub/img_opencode1_m_en.jpg" alt="제 1유형 영문 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한영</span>
+                                        <img src="../../../kogl/img/sub/img_opencode1_m_koen.jpg" alt="제 1유형 한영 마크">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>위 공공누리에 따라 이용자는 다음에서 제시하는 조건을 준수할 경우 공공저작물을 상업적 활용 여부에 관계없이 무료로 자유롭게 이용하고 2차적 저작물 작성 등 변형하여 이용할 수
+                            있습니다.</p>
+                        <h5 class="bu1">출처 표시 의무</h5>
+                        <p>1. 이용자는 공공저작물을 이용할 경우, 다음과 같이 출처 또는 저작권자를 표시해야 합니다.</p>
+                        <p class="red">ex) "본 저작물은 'OOO(기관명)'에서 'OO년' 작성하여 공공누리 제O유형으로 개방한 '저작물명(작성자:OOO)'을 이용하였으며,
+                            해당 저작물은 'OOO(기관명), OOO(홈페이지 주소)'에서 무료로 다운받으실 수 있습니다."</p>
+                        <p class="point2">* 위 내용은 예시이므로 작성연도 및 해당 기관명과 홈페이지 주소, 작성자명 기입</p>
+                        <p>2. 온라인에서 출처 웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를 제공하여야 합니다.</p>
+                        <p>3 .이용자는 공공기관이 이용자를 후원한다거나 공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <h5 class="bu1">공공기관의 면책</h5>
+                        <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                        <p>2. 공공기관은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 공공기관 및 그 직원은 책임을 지지 않습니다.</p>
+                        <h5 class="bu1">이용허락조건 위반의 효과</h5>
+                        <p>이용자는 공공누리의 이용허락의 조건 중 어느 하나라도 위반한 경우 이용허락이 자동으로 종료되며, 이용자는 즉시 공공저작물의 이용을 중단해야 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <button type="button" onclick="closeDialog(this)" class="dialog-close">닫기</button>
+            </div>    
+        </div>
+    </div>
+    <!-- 공공누리인증서2유형팝업 -->
+    <div class="dialog w-md">
+        <div role="dialog" id="dialogOpencode2" aria-labelledby="opencode2_label" aria-modal="true" class="hidden">
+            <div class="head">
+                <h2 id="opencode2_label" class="dialog-label">공공누리 일반증서</h2>
+            </div>
+            <div class="body">
+                <div aria-label="공공누리인증서2유형" class="tablist2">
+                    <ul>
+                        <li class="on"><a href="#certificate2-tab"><span>공공누리 일반증서</span></a></li>
+                        <li><a href="#service2-tab"><span>공공누리 이용약관</span></a></li>
+                    </ul>
+                </div>
+                <div class="contents-tab" id="certificate2-tab">
+                    <div class="panelone" tabindex="0">
+                        <h4 class="panelone__title">제 2유형: 출처 표시 + 상업적 이용금지</h4>
+                        <p class="panelone__desc-p">이 페이지는 공공누리 이용약관과 등록된 저작물의 유형안내에 대하여 이해하기 쉽게 요약한 것입니다.</p>
+                        <h5 class="bu1">이용자가 가지는 권리</h5>
+                        <p>1. 온·오프라인 상에 공유 및 이용 : 온·오프라인을 통하여 공유 및 이용 가능</p>
+                        <p>2. 저작물 변경 : 2차적 저작물로 변경하여 이용 가능</p>
+                        <h5 class="bu1">저작물 사용 조건</h5>
+                        <p>- 출처 표시 : 저작물의 출처를 표시하셔야 합니다.</p>
+                        <p class="refer red">공공기관이 후원한다거나 공공기관과 특수한 관계에 있는 것처럼 제 3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <p>- 상업적 이용금지 : 비영리 목적으로만 저작물을 이용하셔야 합니다. 다만, 별도의 이용허락을 받아 공공저작물을 상업적으로 이용하는 것은 가능합니다.</p>
+                        <h5 class="bu1">알아야 할 사항</h5>
+                        <div class="panelone__wrap">
+                            <h6>I. 이용조건의 표시 및 변경</h6>
+                            <p>1. 이용자가 공공누리 저작물 활용시 출처표시를 꼭 해주셔야 합니다.</p>
+                            <p>2. 공공누리 저작물의 이용조건은 변경될 수 있습니다. 다만 이용자가 이용조건 변경전 사용하셨다면 해당저작물 한해 용도변경 없이 계속 이용할 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>II. 이용조건의 위반</h6>
+                            <p>1. 이용자가 공공누리 이용조건을 위반할 경우 그 즉시 이용허락이 종료됩니다.</p>
+                            <p>2. 이용자가 이용조건 위반 후 지속적으로 공공저작물을 이용할 경우 저작권 침해가 성립되므로 형사상, 민사상 책임을 부담 하실 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>III. 공공기관의 면책</h6>
+                            <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                            <p>2. 공공기관 및 그 직원은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 책임을 지지 않습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>IV. 기타</h6>
+                            <p>1. 이용자가 저작물을 보유하고 있는 공공기관으로부터 별도의 이용허락을 받은 경우 공공누리 조건을 적용하지 않으셔도 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contents-tab" id="service2-tab">
+                    <div class="panelone" tabindex="0">
+                        <h5 class="bu1">공공누리 제 2유형의 이용조건</h5>
+                        <div class="box-opencode">
+                            <ul class="box-opencode__list">
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한글</span>
+                                        <img src="../../../kogl/img/sub/img_opencode2_m.jpg" alt="제 2유형 한글 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">영문</span>
+                                        <img src="../../../kogl/img/sub/img_opencode2_m_en.jpg" alt="제 2유형 영문 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한영</span>
+                                        <img src="../../../kogl/img/sub/img_opencode2_m_koen.jpg" alt="제 2유형 한영 마크">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>위 공공누리에 따라 이용자는 다음에서 제시하는 조건을 준수할 경우 상업적 목적으로 이용하는 것을 제외하고는 공공저작물을 무료로 자유롭게 이용하고 2차적 저작물 작성 등
+                            변형하여 이용할 수 있습니다.</p>
+                        <h5 class="bu1">출처 표시 의무</h5>
+                        <p>1. 이용자는 공공저작물을 이용할 경우, 다음과 같이 출처 또는 저작권자를 표시해야 합니다.</p>
+                        <p class="red">ex) "본 저작물은 'OOO(기관명)'에서 'OO년' 작성하여 공공누리 제O유형으로 개방한 '저작물명(작성자:OOO)'을 이용하였으며,
+                            해당 저작물은 'OOO(기관명), OOO(홈페이지 주소)'에서 무료로 다운받으실 수 있습니다."</p>
+                        <p class="point2">* 위 내용은 예시이므로 작성연도 및 해당 기관명과 홈페이지 주소, 작성자명 기입</p>
+                        <p>2. 온라인에서 출처 웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를 제공하여야 합니다.</p>
+                        <p>3 .이용자는 공공기관이 이용자를 후원한다거나 공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <!-- <strong class="ptit-introtit">이용이 제한되는 정보</strong>
+                                                    - 출처 표시 : 저작물의 출처를 표시하셔야 합니다.<br>
+                                                    다음과 같은 정보는 공공저작물에 포함되어 있더라도 관련 법령에 따라 이용이 제한됩니다.<br><br>
+                        
+                                                    1. 개인정보보호법, 정보통신망 이용촉진 및 정보보호에 관한 법률 등에서 보호하는 개인정보<br>
+                                                    2. 신용정보의 이용 및 보호에 관한 법률 등에서 보호하는 신용정보<br>
+                                                    3. 군사기밀보호법 등에서 보호하는 군사기밀<br>
+                                                    4. 상표권, 디자인권, 특허권 등 다른 권리의 대상이 되는 정보 또는 제3자의 저작권 등이 있는 정보<br>
+                                                    5. 기타 다른 법령에 따라 이용이 제한되는 정보 -->
+                        <h5 class="bu1">공공기관의 면책</h5>
+                        <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                        <p>2. 공공기관은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 공공기관 및 그 직원은 책임을 지지 않습니다.</p>
+
+                        <h5 class="bu1">이용허락조건 위반의 효과</h5>
+                        <p>이용자는 공공누리의 이용허락의 조건 중 어느 하나라도 위반한 경우 이용허락이 자동으로 종료되며, 이용자는 즉시 공공저작물의 이용을 중단해야 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <button type="button" onclick="closeDialog(this)" class="dialog-close">닫기</button>
+            </div>  
+        </div>
+    </div>
+    <!-- 공공누리인증서3유형팝업 -->
+    <div class="dialog w-md">
+        <div role="dialog" id="dialogOpencode3" aria-labelledby="opencode3_label" aria-modal="true" class="hidden">
+            <div class="head">
+                <h2 id="opencode3_label" class="dialog-label">공공누리 일반증서</h2>
+            </div>
+            <div class="body">
+                <div aria-label="공공누리인증서3유형" class="tablist3">
+                    <ul>
+                        <li class="on"><a href="#certificate3-tab"><span>공공누리 일반증서</span></a></li>
+                        <li><a href="#service3-tab"><span>공공누리 이용약관</span></a></li>
+                    </ul>
+                </div>
+                <div class="contents-tab" id="certificate3-tab">
+                    <div class="panelone" tabindex="0">
+                        <h4 class="panelone__title">제 3유형: 출처 표시 + 변경금지</h4>
+                        <p class="panelone__desc-p">이 페이지는 공공누리 이용약관과 등록된 저작물의 유형안내에 대하여 이해하기 쉽게 요약한 것입니다.</p>
+                        <h5 class="bu1">이용자가 가지는 권리</h5>
+                        <p>1. 온·오프라인 상에 공유 및 이용 : 온·오프라인을 통하여 공유 및 이용 가능</p>
+                        <p>2. 이 저작물은 영리 목적으로 이용할 수 있습니다.</p>
+                        <h5 class="bu1">저작물 사용 조건</h5>
+                        <p>- 출처 표시 : 저작물의 출처를 표시하셔야 합니다.</p>
+                        <p class="refer red">공공기관이 후원한다거나 공공기관과 특수한 관계에 있는 것처럼 제 3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <p>- 변경금지 : 저작물을 변경하거나 2차적 저작물 등으로 작성할 수 없습니다.</p>
+                        <h5 class="bu1">알아야 할 사항</h5>
+                        <div class="panelone__wrap">
+                            <h6>I. 이용조건의 표시 및 변경</h6>
+                            <p>1. 이용자가 공공누리 저작물 활용시 출처표시를 꼭 해주셔야 합니다.</p>
+                            <p>2. 공공누리 저작물의 이용조건은 변경될 수 있습니다. 다만 이용자가 이용조건 변경전 사용하셨다면 해당저작물 한해 용도변경 없이 계속 이용할 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>II. 이용조건의 위반</h6>
+                            <p>1. 이용자가 공공누리 이용조건을 위반할 경우 그 즉시 이용허락이 종료됩니다.</p>
+                            <p>2. 이용자가 이용조건 위반 후 지속적으로 공공저작물을 이용할 경우 저작권 침해가 성립되므로 형사상, 민사상 책임을 부담 하실 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>III. 공공기관의 면책</h6>
+                            <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                            <p>2. 공공기관 및 그 직원은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 책임을 지지 않습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>IV. 기타</h6>
+                            <p>1. 이용자가 저작물을 보유하고 있는 공공기관으로부터 별도의 이용허락을 받은 경우 공공누리 조건을 적용하지 않으셔도 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contents-tab" id="service3-tab">
+                    <div class="panelone" tabindex="0">
+                        <h5 class="bu1">공공누리 제 3유형의 이용조건</h5>
+                        <div class="box-opencode">
+                            <ul class="box-opencode__list">
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한글</span>
+                                        <img src="../../../kogl/img/sub/img_opencode3_m.jpg" alt="제 3유형 한글 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">영문</span>
+                                        <img src="../../../kogl/img/sub/img_opencode3_m_en.jpg" alt="제 3유형 영문 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한영</span>
+                                        <img src="../../../kogl/img/sub/img_opencode3_m_koen.jpg" alt="제 3유형 한영 마크">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>위 공공누리에 따라 이용자는 다음에서 제시하는 조건을 준수할 경우 공공저작물을 상업적 활용 여부에 관계없이 무료로 자유롭게 이용하고 2차적 저작물 작성 등 변형하여 이용할 수
+                            있습니다.</p>
+                        <h5 class="bu1">출처 표시 의무</h5>
+                        <p>1. 이용자는 공공저작물을 이용할 경우, 다음과 같이 출처 또는 저작권자를 표시해야 합니다.</p>
+                        <p class="red">ex) "본 저작물은 'OOO(기관명)'에서 'OO년' 작성하여 공공누리 제O유형으로 개방한 '저작물명(작성자:OOO)'을 이용하였으며,
+                            해당 저작물은 'OOO(기관명), OOO(홈페이지 주소)'에서 무료로 다운받으실 수 있습니다."</p>
+                        <p class="point2">* 위 내용은 예시이므로 작성연도 및 해당 기관명과 홈페이지 주소, 작성자명 기입</p>
+                        <p>2. 온라인에서 출처 웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를 제공하여야 합니다.</p>
+                        <p>3 .이용자는 공공기관이 이용자를 후원한다거나 공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <h5 class="bu1">공공기관의 면책</h5>
+                        <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                        <p>2. 공공기관은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 공공기관 및 그 직원은 책임을 지지 않습니다.</p>
+                        <h5 class="bu1">이용허락조건 위반의 효과</h5>
+                        <p>이용자는 공공누리의 이용허락의 조건 중 어느 하나라도 위반한 경우 이용허락이 자동으로 종료되며, 이용자는 즉시 공공저작물의 이용을 중단해야 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <button type="button" onclick="closeDialog(this)" class="dialog-close">닫기</button>
+            </div>  
+        </div>
+    </div>
+    <!-- 공공누리인증서4유형팝업 -->
+    <div class="dialog w-md">
+        <div role="dialog" id="dialogOpencode4" aria-labelledby="opencode4_label" aria-modal="true" class="hidden">
+            <div class="head">
+                <h2 id="opencode4_label" class="dialog-label">공공누리 일반증서</h2>
+            </div>
+            <div class="body">
+                <div aria-label="공공누리인증서4유형" class="tablist4">
+                    <ul>
+                        <li class="on"><a href="#certificate4-tab"><span>공공누리 일반증서</span></a></li>
+                        <li><a href="#service4-tab"><span>공공누리 이용약관</span></a></li>
+                    </ul>
+                </div>
+                <div class="contents-tab" id="certificate4-tab">
+                    <div class="panelone" tabindex="0">
+                        <h4 class="panelone__title">제 4유형: 출처 표시 + 상업적 이용금지 + 변경금지</h4>
+                        <p class="panelone__desc-p">이 페이지는 공공누리 이용약관과 등록된 저작물의 유형안내에 대하여 이해하기 쉽게 요약한 것입니다.</p>
+                        <h5 class="bu1">이용자가 가지는 권리</h5>
+                        <p>1. 온·오프라인 상에 공유 및 이용 : 온·오프라인을 통하여 공유 및 이용 가능</p>
+                        <h5 class="bu1">저작물 사용 조건</h5>
+                        <p>- 출처 표시 : 저작물의 출처를 표시하셔야 합니다.</p>
+                        <p class="refer red">공공기관이 후원한다거나 공공기관과 특수한 관계에 있는 것처럼 제 3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <p>- 상업적 이용금지 : 비영리 목적으로만 저작물을 이용하셔야 합니다. 다만, 별도의 이용허락을 받아 공공저작물을 상업적으로 이용하는 것은 가능합니다.</p>
+                        <p>- 변경금지 : 저작물을 변경하거나 2차적 저작물 등으로 작성할 수 없습니다.</p>
+                        <h5 class="bu1">알아야 할 사항</h5>
+                        <div class="panelone__wrap">
+                            <h6>I. 이용조건의 표시 및 변경</h6>
+                            <p>1. 이용자가 공공누리 저작물 활용시 출처표시를 꼭 해주셔야 합니다.</p>
+                            <p>2. 공공누리 저작물의 이용조건은 변경될 수 있습니다. 다만 이용자가 이용조건 변경전 사용하셨다면 해당저작물 한해 용도변경 없이 계속 이용할 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>II. 이용조건의 위반</h6>
+                            <p>1. 이용자가 공공누리 이용조건을 위반할 경우 그 즉시 이용허락이 종료됩니다.</p>
+                            <p>2. 이용자가 이용조건 위반 후 지속적으로 공공저작물을 이용할 경우 저작권 침해가 성립되므로 형사상, 민사상 책임을 부담 하실 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>III. 공공기관의 면책</h6>
+                            <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                            <p>2. 공공기관 및 그 직원은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 책임을 지지 않습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>IV. 기타</h6>
+                            <p>1. 이용자가 저작물을 보유하고 있는 공공기관으로부터 별도의 이용허락을 받은 경우 공공누리 조건을 적용하지 않으셔도 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contents-tab" id="service4-tab">
+                    <div class="panelone" tabindex="0">
+                        <h5 class="bu1">공공누리 제 4유형의 이용조건</h5>
+                        <div class="box-opencode">
+                            <ul class="box-opencode__list">
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한글</span>
+                                        <img src="../../../kogl/img/sub/img_opencode4_m.jpg" alt="제 4유형 한글 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">영문</span>
+                                        <img src="../../../kogl/img/sub/img_opencode4_m_en.jpg" alt="제 4유형 영문 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한영</span>
+                                        <img src="../../../kogl/img/sub/img_opencode4_m_koen.jpg" alt="제 4유형 한영 마크">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>위 공공누리에 따라 이용자는 다음에서 제시하는 조건을 준수할 경우 공공저작물을 상업적 활용 여부에 관계없이 무료로 자유롭게 이용하고 2차적 저작물 작성 등 변형하여 이용할 수
+                            있습니다.</p>
+                        <h5 class="bu1">출처 표시 의무</h5>
+                        <p>1. 이용자는 공공저작물을 이용할 경우, 다음과 같이 출처 또는 저작권자를 표시해야 합니다.</p>
+                        <p class="red">ex) "본 저작물은 'OOO(기관명)'에서 'OO년' 작성하여 공공누리 제O유형으로 개방한 '저작물명(작성자:OOO)'을 이용하였으며,
+                            해당 저작물은 'OOO(기관명), OOO(홈페이지 주소)'에서 무료로 다운받으실 수 있습니다."</p>
+                        <p class="point2">* 위 내용은 예시이므로 작성연도 및 해당 기관명과 홈페이지 주소, 작성자명 기입</p>
+                        <p>2. 온라인에서 출처 웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를 제공하여야 합니다.</p>
+                        <p>3 .이용자는 공공기관이 이용자를 후원한다거나 공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <h5 class="bu1">공공기관의 면책</h5>
+                        <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                        <p>2. 공공기관은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 공공기관 및 그 직원은 책임을 지지 않습니다.</p>
+                        <h5 class="bu1">이용허락조건 위반의 효과</h5>
+                        <p>이용자는 공공누리의 이용허락의 조건 중 어느 하나라도 위반한 경우 이용허락이 자동으로 종료되며, 이용자는 즉시 공공저작물의 이용을 중단해야 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <button type="button" onclick="closeDialog(this)" class="dialog-close">닫기</button>
+            </div>  
+        </div>
+    </div>
+    <!-- 공공누리인증서만료유형팝업 -->
+    <div class="dialog w-md">
+        <div role="dialog" id="dialogOpencode9" aria-labelledby="opencode9_label" aria-modal="true" class="hidden">
+            <div class="head">
+                <h2 id="opencode9_label" class="dialog-label">공공누리 일반증서</h2>
+                <button type="button" onclick="closeDialog(this)" title="닫기" class="dialog-close"></button>
+            </div>
+            <div class="body">
+                <div aria-label="공공누리인증서 만료공공저작물" class="tablist4">
+                    <ul>
+                        <li class="on"><a href="#certificate9-tab"><span>공공누리 일반증서</span></a></li>
+                        <li><a href="#service9-tab"><span>공공누리 이용약관</span></a></li>
+                    </ul>
+                </div>
+                <div class="contents-tab" id="certificate9-tab">
+                    <div class="panelone" tabindex="0">
+                        <h4 class="panelone__title">만료공공저작물 : 누구나 이용조건(출처표시 포함)이 없이 자유롭게 이용 가능</h4>
+                        <p class="panelone__desc-p">이 페이지는 공공누리 이용약관과 등록된 저작물의 유형안내에 대하여 이해하기 쉽게 요약한 것입니다.</p>
+                        <h5 class="bu1">이용자가 가지는 권리</h5>
+                        <p>1. 온·오프라인 상에 공유 및 이용 : 온·오프라인을 통하여 공유 및 이용 가능</p>
+                        <h5 class="bu1">저작물 사용 조건</h5>
+                        <p>- 출처 표시 : 저작물의 출처를 표시하셔야 합니다.</p>
+                        <p class="refer red">공공기관이 후원한다거나 공공기관과 특수한 관계에 있는 것처럼 제 3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <p>- 상업적 이용금지 : 비영리 목적으로만 저작물을 이용하셔야 합니다. 다만, 별도의 이용허락을 받아 공공저작물을 상업적으로 이용하는 것은 가능합니다.</p>
+                        <p>- 변경금지 : 저작물을 변경하거나 2차적 저작물 등으로 작성할 수 없습니다.</p>
+                        <h5 class="bu1">알아야 할 사항</h5>
+                        <div class="panelone__wrap">
+                            <h6>I. 이용조건의 표시 및 변경</h6>
+                            <p>1. 이용자가 공공누리 저작물 활용시 출처표시를 꼭 해주셔야 합니다.</p>
+                            <p>2. 공공누리 저작물의 이용조건은 변경될 수 있습니다. 다만 이용자가 이용조건 변경전 사용하셨다면 해당저작물 한해 용도변경 없이 계속 이용할 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>II. 이용조건의 위반</h6>
+                            <p>1. 이용자가 공공누리 이용조건을 위반할 경우 그 즉시 이용허락이 종료됩니다.</p>
+                            <p>2. 이용자가 이용조건 위반 후 지속적으로 공공저작물을 이용할 경우 저작권 침해가 성립되므로 형사상, 민사상 책임을 부담 하실 수 있습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>III. 공공기관의 면책</h6>
+                            <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                            <p>2. 공공기관 및 그 직원은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 책임을 지지 않습니다.</p>
+                        </div>
+                        <div class="panelone__wrap">
+                            <h6>IV. 기타</h6>
+                            <p>1. 이용자가 저작물을 보유하고 있는 공공기관으로부터 별도의 이용허락을 받은 경우 공공누리 조건을 적용하지 않으셔도 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contents-tab" id="service9-tab">
+                    <div class="panelone" tabindex="0">
+                        <h5 class="bu1">만료공공저작물의 이용조건</h5>
+                        <div class="box-opencode">
+                            <ul class="box-opencode__list">
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한글</span>
+                                        <img src="../../../kogl/img/sub/img_opencode9_m.png" alt="만료공공저작물 한글 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">영문</span>
+                                        <img src="../../../kogl/img/sub/img_opencode9_m_en.png" alt="만료공공저작물 영문 마크">
+                                    </div>
+                                </li>
+                                <li class="box-opencode__item">
+                                    <div class="box-opencode__w-box">
+                                        <span class="box-opencode__panelname">한영</span>
+                                        <img src="../../../kogl/img/sub/img_opencode9_m_koen.png" alt="만료공공저작물 한영 마크">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>위 공공누리에 따라 이용자는 다음에서 제시하는 조건을 준수할 경우 공공저작물을 상업적 활용 여부에 관계없이 무료로 자유롭게 이용하고 2차적 저작물 작성 등 변형하여 이용할 수
+                            있습니다.</p>
+                        <h5 class="bu1">출처 표시 의무</h5>
+                        <p>1. 이용자는 공공저작물을 이용할 경우, 다음과 같이 출처 또는 저작권자를 표시해야 합니다.</p>
+                        <p class="red">ex) "본 저작물은 'OOO(기관명)'에서 'OO년' 작성하여 공공누리 제O유형으로 개방한 '저작물명(작성자:OOO)'을 이용하였으며,
+                            해당 저작물은 'OOO(기관명), OOO(홈페이지 주소)'에서 무료로 다운받으실 수 있습니다."</p>
+                        <p class="point2">* 위 내용은 예시이므로 작성연도 및 해당 기관명과 홈페이지 주소, 작성자명 기입</p>
+                        <p>2. 온라인에서 출처 웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를 제공하여야 합니다.</p>
+                        <p>3 .이용자는 공공기관이 이용자를 후원한다거나 공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를 해서는 안됩니다.</p>
+                        <h5 class="bu1">공공기관의 면책</h5>
+                        <p>1. 공공기관은 공공저작물의 정확성이나 지속적인 제공 등을 보장하지 않습니다.</p>
+                        <p>2. 공공기관은 이용자가 공공저작물을 이용함으로써 발생할 수 있는 어떠한 손해나 불이익에 대해서도 공공기관 및 그 직원은 책임을 지지 않습니다.</p>
+                        <h5 class="bu1">이용허락조건 위반의 효과</h5>
+                        <p>이용자는 공공누리의 이용허락의 조건 중 어느 하나라도 위반한 경우 이용허락이 자동으로 종료되며, 이용자는 즉시 공공저작물의 이용을 중단해야 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <button type="button" onclick="closeDialog(this)" class="dialog-close">닫기</button>
+            </div> 
+        </div>
+    </div>
+    
+    <!-- 퀵메뉴 -->
+    <div class="quick-menu">
+        <button type="button" class="quick-menu__btn">
+            <span class="sr-only">퀵메뉴 열기</span>
+        </button>
+        <div class="quick-menu__body">
+            <ul>
+                <li><a href=""><i class="ico-quick"></i><span>개방지원센터<br>안내</span></a></li>
+                <li><a href=""><i class="ico-quick"></i><span>이용안내</span></a></li>
+                <li><a href=""><i class="ico-quick"></i><span>유형안내</span></a></li>
+                <li><a href=""><i class="ico-quick"></i><span>공공저작물<br>자유이용</span></a></li>
+                <li><a href=""><i class="ico-quick"></i><span>자주하는<br>질문</span></a></li>
+                <li><a href=""><i class="ico-quick"></i><span>질문과<br>답변</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+|</html>
