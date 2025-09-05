@@ -1212,10 +1212,21 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                     border-radius: 50%;
                     align-items: center;
                     justify-content: center;
-                    font-size: 14px;
                     transform: translateX(2px);
                     transition: 0.4s;
-                    
+                    &::before {
+                        content: '';
+                        display: block;
+                        width: 14px;
+                        height: 14px;
+                        background: url('/portfolio25/static/images/ico-add.png') center center no-repeat;
+                        background-size: contain;
+                    }
+                    &.opened {
+                        &::before {
+                            background: url('/portfolio25/static/images/ico-remove.png') center center no-repeat;
+                        }
+                    }
                 }
             }
         }

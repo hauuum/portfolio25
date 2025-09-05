@@ -1830,9 +1830,19 @@ svg .y {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
   transform: translateX(2px);
   transition: 0.4s;
+}
+.experience__item .head .date i::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: url("/portfolio25/static/images/ico-add.png") center center no-repeat;
+  background-size: contain;
+}
+.experience__item .head .date i.opened::before {
+  background: url("/portfolio25/static/images/ico-remove.png") center center no-repeat;
 }
 .experience__item .body {
   margin-top: 4px;

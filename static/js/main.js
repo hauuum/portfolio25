@@ -249,21 +249,26 @@ document.addEventListener("DOMContentLoaded", function(){
 	// Section 3 
 	// 아코미언 메뉴
 	var experience = $('.experience__item');
+	experience.find('.body').hide();
+
 	$('.experience__item.on').find('.body').slideDown();
+	$('.experience__item.on').find('.date > i').addClass('opened').attr('aria-label', '상세 설명 닫기');
 
 	experience.find('button').on('click', function () {
-		var isOpen = $(this).parent().hasClass('on');
-	
+		var $parent = $(this).parent();
+		var isOpen = $parent.hasClass('on');
+
 		if (isOpen) {
-			$(this).parent().removeClass('on').find('.body').slideUp();
-			$(this).parent().find('.date > i').text('add');
+			$parent.removeClass('on').find('.body').slideUp();
+			$parent.find('.date > i').removeClass('opened').attr('aria-label', '상세 설명 열기');
 		} 
 		else {
-			$(this).parent().siblings().removeClass('on').find('.body').slideUp();
-			$(this).parent().siblings().find('.date > i').text('add');
-	
-			$(this).parent().addClass('on').find('.body').slideDown();
-			$(this).parent().find('.date > i').text('remove');
+			experience.removeClass('on').find('.body').slideUp();
+			experience.find('.date > i').removeClass('opened').attr('aria-label', '상세 설명 열기');
+
+			// 현재 아이템 열기
+			$parent.addClass('on').find('.body').slideDown();
+			$parent.find('.date > i').addClass('opened').attr('aria-label', '상세 설명 닫기');
 		}
 	});
 
