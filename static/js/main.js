@@ -259,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		var isOpen = $parent.hasClass('on');
 
 		if (isOpen) {
+			//초기값
 			$parent.removeClass('on').find('.body').slideUp();
 			$parent.find('.date > i').removeClass('opened').attr('aria-label', '상세 설명 열기');
 		} 
@@ -266,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function(){
 			experience.removeClass('on').find('.body').slideUp();
 			experience.find('.date > i').removeClass('opened').attr('aria-label', '상세 설명 열기');
 
-			// 현재 아이템 열기
 			$parent.addClass('on').find('.body').slideDown();
 			$parent.find('.date > i').addClass('opened').attr('aria-label', '상세 설명 닫기');
 		}
