@@ -1,62 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
+	// gnb scroll 값에 따라 형태 변화
+	const current = $(window).scrollTop();
+	const about = $('.about').offset().top;
 
-	// gnb 영역
-	const gnbItems = document.querySelectorAll(".gnb ul li");
-	const sectionList = document.querySelectorAll("#wrap > section");
-	const about = document.querySelector(".about");
-  
-	let sectionInfo = [];
-	let aboutTop = 0;
-	let ticking = false;
-	let resizeTimer;
-  
-	// section 순서대로 top, bottom값을 새로운 배열로 가져오기
-	const setSectionInfo = () => {
-		sectionInfo = [...sectionList].map(ele => ({
-			top: ele.offsetTop,
-			bottom: ele.offsetTop + ele.offsetHeight,
-		}));
-	  	aboutTop = about.offsetTop;
-	};
-  
-	const updateActiveSection = () => {
-		// 윈도우 스크롤이 0보다 크면 body에 'scroll' 클래스 붙이기
-		const scrollY = window.scrollY;
-		document.body.classList.toggle("scroll", scrollY > aboutTop);
-	
-		// 현재 스크롤이 위치한 section 인덱스와 gnb li의 인덱스 동기화하기
-		sectionInfo.forEach((ele, i) => {
-			const active = scrollY >= ele.top && scrollY < ele.bottom;
-			gnbItems[i].classList.toggle("on", active);
-		});
-	};
-  
-	// scroll 이벤트 최적화하기
-	const onScroll = () => {
-		if (!ticking) {
-			requestAnimationFrame(() => {
-				updateActiveSection();
-				ticking = false;
-			});
-			ticking = true;
+	if (current > about) {
+		$('body').addClass('scroll');
+	} 
+	else {
+		$('body').removeClass('scroll');
+	}
+
+	const headerH = $('.header').outerHeight() || 0;
+	$("#wrap > section").each(function (i) {
+		const sectionTop = $(this).offset().top;
+		const sectionHeight = $(this).outerHeight();
+		const adjusted = current + headerH + 1; // 헤더 보정 및 경계 오프셋
+
+		if (adjusted >= sectionTop && adjusted < sectionTop + sectionHeight) {
+			$('.gnb ul li').eq(i).addClass('on').siblings().removeClass('on')
 		}
-	};
-  
-	// resize할때 0.2s 마다 section의 top, bottom값 새로 받아오기
-	const onResize = () => {
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(setSectionInfo, 200);
-	};
-  
-	// 초기 실행
-	setSectionInfo();
-	updateActiveSection();
-  
-	// 이벤트 등록
-	window.addEventListener("scroll", onScroll);
-	window.addEventListener("resize", onResize);
-  
+	});
 
+	$(window).on('scroll', function () {
+		const current = $(window).scrollTop();
+	
+		if (current > about) {
+			$('body').addClass('scroll');
+		} 
+		else {
+			$('body').removeClass('scroll');
+		}
+	
+		const headerH = $('.header').outerHeight() || 0;
+
+		$("#wrap > section").each(function (i) {
+			const sectionTop = $(this).offset().top;
+			const sectionHeight = $(this).outerHeight();
+			const adjusted = current + headerH + 1; // 헤더 보정 및 경계 오프셋
+		
+			if (adjusted >= sectionTop && adjusted < sectionTop + sectionHeight) {
+				$('.gnb ul li').eq(i).addClass('on').siblings().removeClass('on')
+			}
+		});
+	});
 
 
 	// Section 1
@@ -168,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const mm = gsap.matchMedia();
 
 	function initAnimation() {
-		mm.add("(min-width: 960px)", () => {
+		mm.add("(min-width: 1200px)", () => {
 			// 기본값
 			gsap.set(horizontal, { display: "flex" });
 			sections.forEach((s) => gsap.set(s, { width: `${100 / sections.length}%`, flexShrink: 0 }));
@@ -257,15 +243,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Section 3 
 	// 아코미언 메뉴
-	var experience = $('.experience__item');
+	const experience = $('.experience__item');
 	experience.find('.body').hide();
 
 	$('.experience__item.on').find('.body').slideDown();
 	$('.experience__item.on').find('.date > i').addClass('opened').attr('aria-label', '상세 설명 닫기');
 
 	experience.find('button').on('click', function () {
-		var $parent = $(this).parent();
-		var isOpen = $parent.hasClass('on');
+		const $parent = $(this).parent();
+		const isOpen = $parent.hasClass('on');
 
 		if (isOpen) {
 			$parent.removeClass('on').find('.body').slideUp();
@@ -284,8 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	gsap.from(".marker", {
 		width: 0,
 		transformOrigin: "left center", 
-		ease: "none",
-		
+		ease: 'power1.inOut',
 		scrollTrigger: {
 			trigger: ".experience",
 			scrub: true,
@@ -330,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	// 프로젝트 상세 열기
 	$('.work__list ul li').on('click', function(){
-		var workInx = $(this).index();
+		let workInx = $(this).index();
 		
 		$('.work__list').css('display','none');
 		$('.work__view').css('display','flex');
@@ -356,7 +341,4 @@ document.addEventListener("DOMContentLoaded", () => {
 		mm.revert(); //기존 애니메이션 & ScrollTrigger 정리
 		initAnimation();
 	});
-
-
-
 });//doc end
