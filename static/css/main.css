@@ -2185,7 +2185,7 @@ svg .y {
 .work__view .screen .swiper-thumbs {
   position: relative;
   height: 96px;
-  padding: 0 34px;
+  padding: 0 38px;
   margin-top: 10px;
 }
 .work__view .screen .swiper-thumbs .swiper-slide {
@@ -2273,13 +2273,7 @@ svg .y {
   line-height: 1;
 }
 .work__view .screen .info .desc {
-  overflow: hidden;
-  height: 240px;
   margin-top: 20px;
-}
-.work__view .screen .info .desc > div {
-  height: calc(100% - 24px);
-  overflow-y: auto;
 }
 .work__view .screen .info .desc p {
   font-size: 15px;
@@ -2429,18 +2423,23 @@ svg .y {
     max-height: calc(100vh - 80px);
   }
   .work__view .screen .b-close {
-    top: 8px;
-    right: 8px;
+    position: fixed;
+    top: 40px;
+    right: 40px;
   }
   .work__view .screen > div {
     display: block;
     padding: 30px;
+    overflow-y: scroll;
   }
   .work__view .screen .swiper:first-of-type {
     height: 280px !important;
   }
   .work__view .screen .swiper img {
     width: 100%;
+  }
+  .work__view .screen .info {
+    height: auto;
   }
   .work__view .screen .info .desc {
     height: auto;
@@ -2484,8 +2483,6 @@ svg .y {
     height: 62px;
   }
   .work__view .screen .info {
-    height: calc(100% - 292px - 16px);
-    overflow-y: auto;
     padding: 0;
     margin-top: 16px;
   }
