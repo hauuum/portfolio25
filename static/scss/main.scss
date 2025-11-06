@@ -1292,7 +1292,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                 max-width: 190px;
                 height: 18px;
                 background: #FE4F4F;
-                transition: width 2.6s;
+                transition: width 1.6s;
                 z-index: -1;
             }
         }
@@ -1653,7 +1653,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                 height: 100%;
                 z-index: 2;
                 padding: 16px 0;
-                overflow: hidden;
+                overflow-y: auto;
                 .ctgr {
                     display: block;
                     font-family: 'SUIT Variable';
@@ -1727,11 +1727,11 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                 }
             }
             .b-close {
-                position: absolute;
+                position: fixed;
                 width: 40px;
                 height: 40px;
-                top: 12px;
-                right: 12px;
+                top: 36px;
+                right: 52px;
                 background-color: #fff;
                 border-radius: 50%;
                 background-image: url(/portfolio25/static/images/ico-close.png);
@@ -1853,8 +1853,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
             }
             .screen {
                 .b-close {
-                    position: fixed;
-                    top: 40px;
+                    top: 30px;
                     right: 40px;
                 }
                 > div {
@@ -1941,6 +1940,10 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                             font-size: 15px;
                         }
                     }
+                }
+                .b-close {
+                    top: 24px;
+                    right: 34px;
                 }
             }
              

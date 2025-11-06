@@ -1904,7 +1904,7 @@ svg .y {
   max-width: 190px;
   height: 18px;
   background: #FE4F4F;
-  transition: width 2.6s;
+  transition: width 1.6s;
   z-index: -1;
 }
 .experience__strength dd li {
@@ -2243,7 +2243,7 @@ svg .y {
   height: 100%;
   z-index: 2;
   padding: 16px 0;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .work__view .screen .info .ctgr {
   display: block;
@@ -2306,11 +2306,11 @@ svg .y {
   background-size: contain;
 }
 .work__view .screen .b-close {
-  position: absolute;
+  position: fixed;
   width: 40px;
   height: 40px;
-  top: 12px;
-  right: 12px;
+  top: 36px;
+  right: 52px;
   background-color: #fff;
   border-radius: 50%;
   background-image: url(/portfolio25/static/images/ico-close.png);
@@ -2423,8 +2423,7 @@ svg .y {
     max-height: calc(100vh - 80px);
   }
   .work__view .screen .b-close {
-    position: fixed;
-    top: 40px;
+    top: 30px;
     right: 40px;
   }
   .work__view .screen > div {
@@ -2491,6 +2490,10 @@ svg .y {
   }
   .work__view .screen .info .desc p {
     font-size: 15px;
+  }
+  .work__view .screen .b-close {
+    top: 24px;
+    right: 34px;
   }
 }
 /* contact */

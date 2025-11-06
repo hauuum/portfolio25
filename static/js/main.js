@@ -1,123 +1,128 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", () => {
 
-	// gnb scroll 값에 따라 형태 변화
-	var current = $(window).scrollTop();
-	var about = $('.about').offset().top;
-
-	if (current > about) {
-		$('body').addClass('scroll');
-	} 
-	else {
-		$('body').removeClass('scroll');
-	}
-
-	$("#wrap > section").each(function (i) {
-		var sectionTop = $(this).offset().top;
-		var sectionHeight = $(this).outerHeight();
-
-		if (current >= sectionTop && current < sectionTop + sectionHeight) {
-			$('.gnb ul li').eq(i).addClass('on').siblings().removeClass('on')
-		}
-	});
-
-	$(window).on('scroll', function () {
-		var current = $(window).scrollTop();
+	// gnb 영역
+	const gnbItems = document.querySelectorAll(".gnb ul li");
+	const sectionList = document.querySelectorAll("#wrap > section");
+	const about = document.querySelector(".about");
+  
+	let sectionInfo = [];
+	let aboutTop = 0;
+	let ticking = false;
+	let resizeTimer;
+  
+	// section 순서대로 top, bottom값을 새로운 배열로 가져오기
+	const setSectionInfo = () => {
+		sectionInfo = [...sectionList].map(ele => ({
+			top: ele.offsetTop,
+			bottom: ele.offsetTop + ele.offsetHeight,
+		}));
+	  	aboutTop = about.offsetTop;
+	};
+  
+	const updateActiveSection = () => {
+		// 윈도우 스크롤이 0보다 크면 body에 'scroll' 클래스 붙이기
+		const scrollY = window.scrollY;
+		document.body.classList.toggle("scroll", scrollY > aboutTop);
 	
-		if (current > about) {
-			$('body').addClass('scroll');
-		} 
-		else {
-			$('body').removeClass('scroll');
-		}
-	
-		$("#wrap > section").each(function (i) {
-			var sectionTop = $(this).offset().top;
-			var sectionHeight = $(this).outerHeight();
-	
-			if (current >= sectionTop && current < sectionTop + sectionHeight) {
-				$('.gnb ul li').eq(i).addClass('on').siblings().removeClass('on')
-			}
+		// 현재 스크롤이 위치한 section 인덱스와 gnb li의 인덱스 동기화하기
+		sectionInfo.forEach((ele, i) => {
+			const active = scrollY >= ele.top && scrollY < ele.bottom;
+			gnbItems[i].classList.toggle("on", active);
 		});
-	});
+	};
+  
+	// scroll 이벤트 최적화하기
+	const onScroll = () => {
+		if (!ticking) {
+			requestAnimationFrame(() => {
+				updateActiveSection();
+				ticking = false;
+			});
+			ticking = true;
+		}
+	};
+  
+	// resize할때 0.2s 마다 section의 top, bottom값 새로 받아오기
+	const onResize = () => {
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(setSectionInfo, 200);
+	};
+  
+	// 초기 실행
+	setSectionInfo();
+	updateActiveSection();
+  
+	// 이벤트 등록
+	window.addEventListener("scroll", onScroll);
+	window.addEventListener("resize", onResize);
+  
+
 
 
 	// Section 1
 	// 텍스트 호버시 하트 뿌리는 효과
-	var hoverLove = document.querySelector('.js-hover-love');
-	var safeToAnimate = null;
+	const hoverLove = document.querySelector('.js-hover-love');
+	hoverLove.querySelectorAll('span[class^="js-love"]').forEach(e => e.remove());
 
-	if (hoverLove) {
-		safeToAnimate = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+	for (let i = 0; i < 20; i++) {
+		hoverLove.insertAdjacentHTML('beforeend', `<span class="js-love${i}">❤️</span>`);
+	}
 
-		if (safeToAnimate) {
-			hoverLove.querySelectorAll('span[class^="js-love"]').forEach(e => e.remove());
+	const playLove = () => {
+		for (let i = 0; i < 20; i++) {
+			const love = hoverLove.querySelector(`.js-love${i}`);
+			gsap.set(love, { x: 0, y: 0, opacity: 1, scale: 1 });
 
-			for (var i = 0; i < 20; i++) {
-				hoverLove.insertAdjacentHTML('beforeend', `<span class="js-love${i}">❤️</span>`);
-			}
+			const angle1 = Math.random() * 2 * Math.PI;
+			const distance1 = 80 + Math.random() * 80;
+			const x = Math.cos(angle1) * distance1;
+			const y = Math.sin(angle1) * distance1;
 
-			function playLove() {
-				for (var i = 0; i < 20; i++) {
-					var love = hoverLove.querySelector(`.js-love${i}`);
-					gsap.set(love, { x: 0, y: 0, opacity: 1, scale: 1 });
-
-					var angle1 = Math.random() * 2 * Math.PI;
-					var distance1 = 80 + Math.random() * 80;
-					var x = Math.cos(angle1) * distance1;
-					var y = Math.sin(angle1) * distance1;
-
-					gsap.to(love, {
-						x: x,
-						y: y,
-						scale: 0.6 + Math.random() * 0.7,
-						opacity: 0,
-						duration: 1.2 + Math.random() * 0.6,
-						ease: "power2.out",
-						delay: Math.random() * 0.2
-					});
-				}
-			}
-
-			hoverLove.addEventListener('mouseover', playLove);
-			hoverLove.addEventListener('mouseleave', function(){
-				hoverLove.querySelectorAll('span[class^="js-love"]').forEach(e => e.remove());
-				for (var i = 0; i < 20; i++) {
-					hoverLove.insertAdjacentHTML('beforeend', `<span class="js-love${i}">❤️</span>`);
-				}
+			gsap.to(love, {
+				x,
+				y,
+				scale: 0.6 + Math.random() * 0.7,
+				opacity: 0,
+				duration: 1.2 + Math.random() * 0.6,
+				ease: "power2.out",
+				delay: Math.random() * 0.2
 			});
 		}
 	}
+
 	hoverLove.addEventListener('mouseover', playLove);
-	hoverLove.addEventListener('mouseleave', function(){
+	hoverLove.addEventListener('mouseleave', () => {
 		hoverLove.querySelectorAll('span[class^="js-love"]').forEach(e => e.remove());
-		for (var i = 0; i < 20; i++) {
+		for (let i = 0; i < 20; i++) {
 			hoverLove.insertAdjacentHTML('beforeend', `<span class="js-love${i}">❤️</span>`);
 		}
 	});
 
+
 	// 텍스트 호버시 좋아요 효과
-	var hoverLike = document.querySelector('.js-hover-like');
-	var hoverLikeWrap = document.querySelector('.js-hover-like-wrap');
+	const hoverLike = document.querySelector('.js-hover-like');
+	const hoverLikeWrap = document.querySelector('.js-hover-like-wrap');
+
 	if (hoverLike && hoverLikeWrap) {
 		hoverLikeWrap.querySelectorAll('span[class^="js-like"]').forEach(e => e.remove());
 
-		for (var i = 0; i < 12; i++) {
+		for (let i = 0; i < 12; i++) {
 			hoverLikeWrap.insertAdjacentHTML('beforeend', `<span class="js-like${i}">👍</span>`);
 		}
 
-		function playLikes() {
-			for (var i = 0; i < 12; i++) {
-				var like = hoverLikeWrap.querySelector(`.js-like${i}`);
+		const playLikes = () => {
+			for (let i = 0; i < 12; i++) {
+				const like = hoverLikeWrap.querySelector(`.js-like${i}`);
 				gsap.set(like, { x: 0, y: 0, opacity: 1, scale: 1 });
 
-				var angle2 = Math.random() * 2 * Math.PI;
-				var distance2 = 60 + Math.random() * 60;
-				var x = Math.cos(angle2) * distance2;
-				var y = Math.sin(angle2) * distance2;
+				const angle2 = Math.random() * 2 * Math.PI;
+				const distance2 = 60 + Math.random() * 60;
+				const x = Math.cos(angle2) * distance2;
+				const y = Math.sin(angle2) * distance2;
 
 				gsap.to(like, {
-					x: x,
-					y: y,
+					x,
+					y,
 					scale: 1.8 + Math.random() * 0.6,
 					opacity: 0,
 					duration: 0.8 + Math.random() * 0.8,
@@ -128,9 +133,9 @@ document.addEventListener("DOMContentLoaded", function(){
 		}
 
 		hoverLike.addEventListener('mouseover', playLikes);
-		hoverLike.addEventListener('mouseleave', function(){
+		hoverLike.addEventListener('mouseleave', () => {
 			hoverLikeWrap.querySelectorAll('span[class^="js-like"]').forEach(e => e.remove());
-			for (var i = 0; i < 12; i++) {
+			for (let i = 0; i < 12; i++) {
 				hoverLikeWrap.insertAdjacentHTML('beforeend', `<span class="js-like${i}">👍</span>`);
 			}
 		});
@@ -138,34 +143,38 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 	// 스위치 클릭 시 다크모드
-	$('.switch input[type=checkbox]').on('click', function() {
-		if ( $(this).is(':checked')){
-			$('body').addClass('light');
-			$('.logo .line').css({ 'animation': 'line 1s linear forwards'});
-		}
-		else {
-			$('body').removeClass('light');
-		}
-	})
+	const switchCheckboxes = document.querySelectorAll('.switch input[type=checkbox]');
+	switchCheckboxes.forEach((cb) => {
+		cb.addEventListener('click', (e) => {
+			if (e.currentTarget.checked){
+				document.body.classList.add('light');
+				const logoLine = document.querySelector('.logo .line');
+				if (logoLine) logoLine.style.animation = 'line 1s linear forwards';
+			}
+			else {
+				document.body.classList.remove('light');
+			}
+		});
+	});
 
 
 	// Section 2
 	// gsap 가로 스크롤
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-	var horizontal = document.querySelector(".horizontal");
-	var sections = gsap.utils.toArray(".horizontal > .section");
-	var aboutSections = document.querySelectorAll('.about .section');
-	var mm = gsap.matchMedia();
+	const horizontal = document.querySelector(".horizontal");
+	const sections = gsap.utils.toArray(".horizontal > .section");
+	const aboutSections = document.querySelectorAll('.about .section');
+	const mm = gsap.matchMedia();
 
 	function initAnimation() {
 		mm.add("(min-width: 960px)", () => {
 			// 기본값
 			gsap.set(horizontal, { display: "flex" });
-			sections.forEach(s => gsap.set(s, { width: `${100 / sections.length}%`, flexShrink: 0 }));
+			sections.forEach((s) => gsap.set(s, { width: `${100 / sections.length}%`, flexShrink: 0 }));
 
 			// 타임라인
-			var horizontalScroll = gsap.to(sections, {
+			const horizontalScroll = gsap.to(sections, {
 				xPercent: -100 * (sections.length - 1),
 				ease: "none",
 				scrollTrigger: {
@@ -187,14 +196,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			});
 
 			// 각 .section  속 텍스트 애니메이션들 생성
-			var created = [];
+			const created = [];
 			aboutSections.forEach((section) => {
-				var transforms = section.querySelectorAll('.transform');
-				var desc = section.querySelectorAll('.desc > p');
+				const transforms = section.querySelectorAll('.transform');
+				const desc = section.querySelectorAll('.desc > p');
 				// 화면 크기에 따라 y 값 변경
-				var yValue = window.innerWidth >= 1200 ? -87 : -74;
+				const yValue = window.innerWidth >= 1200 ? -87 : -74;
 
-				var t1 = gsap.to(transforms, {
+				const t1 = gsap.to(transforms, {
 					y: yValue,
 					duration: 0.6,
 					ease: "power3.inOut",
@@ -211,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					},
 				});
 
-				var t2 = gsap.from(desc, {
+				const t2 = gsap.from(desc, {
 					y: -100,
 					opacity: 0,
 					duration: 1,
@@ -259,7 +268,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		var isOpen = $parent.hasClass('on');
 
 		if (isOpen) {
-			//초기값
 			$parent.removeClass('on').find('.body').slideUp();
 			$parent.find('.date > i').removeClass('opened').attr('aria-label', '상세 설명 열기');
 		} 
@@ -271,6 +279,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			$parent.find('.date > i').addClass('opened').attr('aria-label', '상세 설명 닫기');
 		}
 	});
+
 
 	gsap.from(".marker", {
 		width: 0,
@@ -290,10 +299,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	// Section 4 
 	// swiper
 	document.querySelectorAll(".screen").forEach((screenEl) => {
-		var thumbs = screenEl.querySelector(".swiper-thumbs");
-		var main = screenEl.querySelector(".swiper-main");
+		const thumbs = screenEl.querySelector(".swiper-thumbs");
+		const main = screenEl.querySelector(".swiper-main");
 	  
-		var swiperThumbs = new Swiper(thumbs, {
+		const swiperThumbs = new Swiper(thumbs, {
 			spaceBetween: 12,
 			slidesPerView: "auto",
 			watchSlidesProgress: true,
@@ -307,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		 	//  }
 		});
 	  
-		var swiperMain = new Swiper(main, {
+		const swiperMain = new Swiper(main, {
 		  spaceBetween: 10,
 		  navigation: {
 				nextEl: screenEl.querySelector(".swiper-button-next"),
