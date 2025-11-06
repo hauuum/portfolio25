@@ -294,17 +294,17 @@ document.addEventListener("DOMContentLoaded", function(){
 		var main = screenEl.querySelector(".swiper-main");
 	  
 		var swiperThumbs = new Swiper(thumbs, {
-			spaceBetween: 8,
+			spaceBetween: 12,
 			slidesPerView: "auto",
 			watchSlidesProgress: true,
 			allowTouchMove: false,
 			observer: true,
 			observeParents: true,
-			breakpoints: {
-				768: {
-					slidesPerView: 4,
-				}
-		  }
+			// breakpoints: {
+			// 	768: {
+			// 		slidesPerView: 4,
+			// 	}
+		 	//  }
 		});
 	  
 		var swiperMain = new Swiper(main, {
