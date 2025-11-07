@@ -2127,7 +2127,7 @@ svg .y {
   display: flex;
   position: absolute;
   width: 100%;
-  max-width: 1020px;
+  max-width: 960px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
