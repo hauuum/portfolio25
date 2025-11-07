@@ -1859,7 +1859,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                 > div {
                     display: block;
                     padding: 30px;
-                    overflow-y: scroll;
+                    overflow-y: auto;
                 }
                 .swiper {
                     &:first-of-type {

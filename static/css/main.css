@@ -2429,7 +2429,7 @@ svg .y {
   .work__view .screen > div {
     display: block;
     padding: 30px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .work__view .screen .swiper:first-of-type {
     height: 280px !important;
