@@ -2058,6 +2058,7 @@ svg .y {
   right: 16px;
   top: 0;
   background-position: 0 -16px;
+  z-index: 1;
 }
 .work__list .base span.bbr {
   height: 16px;
@@ -2065,6 +2066,7 @@ svg .y {
   right: 16px;
   bottom: 0;
   background-position: 0 -32px;
+  z-index: 1;
 }
 .work__list .base span.lbr {
   width: 16px;

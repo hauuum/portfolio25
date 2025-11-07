@@ -1465,6 +1465,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                     right: 16px;
                     top: 0;
                     background-position: 0 -16px;
+                    z-index: 1;
                 }
                 &.bbr {
                     height: 16px;
@@ -1472,6 +1473,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                     right: 16px;
                     bottom: 0;
                     background-position: 0 -32px;
+                    z-index: 1;
                 }
                 &.lbr {
                     width: 16px;
