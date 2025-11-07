@@ -1789,6 +1789,7 @@ $letters : (b, c, e, g, h, l, n, o, p, s, v, y);
                     top: 0;
                     background-position: 0 -40px;
                     background-repeat: repeat-x;
+                    z-index: 1;
                 }
                 &.bbr {
                     position: absolute;

@@ -2366,6 +2366,7 @@ svg .y {
   top: 0;
   background-position: 0 -40px;
   background-repeat: repeat-x;
+  z-index: 1;
 }
 .work__view .base span.bbr {
   position: absolute;
